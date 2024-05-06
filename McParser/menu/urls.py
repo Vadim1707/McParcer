@@ -1,5 +1,6 @@
 from rest_framework.routers import SimpleRouter
-from .views import AllProductsViewSet
+from django.urls import path
+from .views import AllProductsViewSet, ProductViewSet, ProductDetailViewSet
 
 
 router = SimpleRouter()
@@ -10,3 +11,8 @@ router.register("all_products", AllProductsViewSet)
 # c) get: //products/{product_name}/{product_field}  - return information about exact field      exact product
 
 urlpatterns = router.urls
+
+urlpatterns += [
+    path("products/<str:product_name>/", ProductViewSet.as_view()),
+    path("products/<str:product_name>/<str:product_field>/", ProductDetailViewSet.as_view()),
+]
