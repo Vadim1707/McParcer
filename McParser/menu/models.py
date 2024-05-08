@@ -2,6 +2,7 @@ from django.db import models
 
 # Create your models here.
 
+
 class McFoodInfo(models.Model):
     name = models.CharField(max_length=100, verbose_name='Name')
     description = models.TextField(verbose_name='Description')

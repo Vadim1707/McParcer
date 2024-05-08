@@ -9,6 +9,10 @@ class ProductViewSetTests(APITestCase):
         McFoodInfo.objects.create(name='product1', description="description")
         McFoodInfo.objects.create(name='product2', description="description")
 
+    def test_get_all_products(self):
+        response = self.client.get('/api/all_products/')
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+        self.assertEqual(len(response.data), 2)
     def test_get_object_exact_match(self):
         response = self.client.get('/api/products/product1/')
         self.assertEqual(response.status_code, status.HTTP_200_OK)
