@@ -3,6 +3,7 @@ import json
 from rest_framework.response import Response
 from rest_framework import viewsets, mixins, status, views
 from django.db.models import Q
+from django.http import Http404
 
 from .models import McFoodInfo
 from .serializers import McFoodInfoSerializer
@@ -47,6 +48,8 @@ class ProductViewSet(views.APIView):
                 name__iexact=product_name))
 
         products = products.union(products2)
+        if not products.exists():
+            raise Http404(f"No such products that correspond to '{product_name}'")
         serializer = self.serializer_class(products, many=True)
         return Response(serializer.data)
 
@@ -69,7 +72,9 @@ class ProductDetailViewSet(views.APIView):
         try:
             serializer = self.serializer_class(product)
             res = serializer.data.pop(product_field)
-        except AttributeError:
-            return Response(status=status.HTTP_404_NOT_FOUND)
+        except AttributeError or KeyError:
+            raise Http404(f"No field '{product_field}' for '{product_name}'")
+        except Exception as e:
+            raise Http404(f"No field '{product_field}' for '{product_name}'")
 
         return Response(res)
