@@ -26,3 +26,12 @@ To see all data in other format:
 2. python manage.py createsuperuser (create profile for admin access)
 3. start server and go to _/admin/_ page.
 4. Insert your creditentials here and look at data in more convenient way
+
+## Preview of endpoints
+
+
+![all_products](https://github.com/Vadim1707/McParcer/blob/master/media/all_products.png)
+
+![all_products](https://github.com/Vadim1707/McParcer/blob/master/media/products_cheese.png)
+
+![all_products](https://github.com/Vadim1707/McParcer/blob/master/media/cheeseburger_salt.png)
